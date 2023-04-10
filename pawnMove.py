@@ -9,6 +9,8 @@ def move(board, pos, target):
     board[targety][targetx]=pawn
     return board
 
+def checkCaptures():
+    pass
 
 def checkPos(board,pos):
     posx=int(ord(pos[0].lower())-97)
