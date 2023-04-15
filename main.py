@@ -6,33 +6,34 @@ import os
 
 if __name__ == "__main__":
 
-    # board = [[0,2,0,2,0,2,0,2],
-            #  [2,0,2,0,2,0,2,0],
-            #  [0,0,0,0,0,0,0,0],
-            #  [0,0,0,0,0,0,0,0],
-            #  [0,0,0,0,0,0,0,0],
-            #  [0,0,0,0,0,0,0,0],
-            #  [0,1,0,1,0,1,0,1],
-            #  [1,0,1,0,1,0,1,0]]
     board = [[0,2,0,2,0,2,0,2],
-             [0,0,0,0,2,0,2,0],
-             [0,2,0,0,0,0,0,0],
+             [2,0,2,0,2,0,2,0],
              [0,0,0,0,0,0,0,0],
-             [0,0,0,2,0,0,0,0],
+             [0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0],
              [0,0,0,0,0,0,0,0],
              [0,1,0,1,0,1,0,1],
              [1,0,1,0,1,0,1,0]]
+    # board = [[0,0,0,2,0,2,0,2],
+            #  [0,0,0,0,2,0,2,0],
+            #  [0,0,0,0,0,0,0,0],
+            #  [0,0,0,0,2,0,0,0],
+            #  [0,0,0,0,0,0,0,0],
+            #  [0,0,2,0,0,0,2,0],
+            #  [0,1,0,1,0,1,0,1],
+            #  [1,0,1,0,1,0,1,0]]
 
 
     while True:
         caputuredThisTurn=False
-        while len(checkCaptures(board))>0:
+        if len(checkCaptures(board))>0:
             os.system('cls')
             draw(board)
             print()
             pos=input("Podaj pole pionkaX: ")
             capturingPawns = []
             capturePos = []
+            moreCaptures=True
             for i in checkCaptures(board):
                 capturingPawns.append(i[0])
                 capturePos.append(i[1])
@@ -44,7 +45,6 @@ if __name__ == "__main__":
             for i in range(len(capturePos)):
                 if capturingPawns[i]==pos:
                     capturesForPawn.append(capturePos[i])
-            #print(capturesForPawn)
             target=input("Podaj gdzie go chcesz ruszyc pionka: ")
             while target.lower()not in capturesForPawn:
                 print("Podano nieprawidlowe pole!")
@@ -52,6 +52,31 @@ if __name__ == "__main__":
             board = capture(board,pos,target)
             board = move(board,pos,target)
             caputuredThisTurn=True
+            pos=target
+            while len(checkCaptures(board))>0 and moreCaptures==True:
+                os.system('cls')
+                draw(board)
+                print()
+                capturingPawns=[]
+                capturePos=[]
+                capturesForPawn=[]
+                newCaptures = list(checkCaptures(board))
+                for i in range(len(newCaptures)):
+                    capturingPawns.append(newCaptures[i][0])
+                    capturePos.append(newCaptures[i][1])
+                for i in range(len(capturePos)):
+                    if capturingPawns[i]==pos:
+                        capturesForPawn.append(capturePos[i])
+                if len(capturesForPawn)>0:
+                    target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                    while target.lower() not in capturesForPawn:
+                        print("Podano nieprawidlowe pole!")
+                        target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                    board = capture(board,pos,target)
+                    board = move(board,pos,target)
+                    pos=target
+                else:
+                    moreCaptures=False
         else: 
             if caputuredThisTurn==False:
                 os.system('cls')
@@ -69,6 +94,6 @@ if __name__ == "__main__":
                     target=input("Podaj gdzie go chcesz ruszyc pionka: ")
                 board = move(board,pos,target)
                 ai_move(board)
-        #input("confirm end of turn")
+        input("confirm end of turn")
         
             
