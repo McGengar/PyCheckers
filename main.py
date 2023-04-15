@@ -1,6 +1,6 @@
 from mapGen import *
 from pawnMove import *
-from ai import ai_move
+from ai import aiMove
 import os
 
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                     print("Podano nieprawidlowe pole!")
                     target=input("Podaj gdzie go chcesz ruszyc pionka: ")
                 board = move(board,pos,target)
-                ai_move(board)
-        input("confirm end of turn")
+        board = aiMove(board)
+        #input("confirm end of turn")
         
             
