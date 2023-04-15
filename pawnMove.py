@@ -22,16 +22,16 @@ def checkCaptures(board):
     possibleCaptures = set()
 
     for pawn in pawnPositions:
-        if pawn[1]>1:
-            if board[pawn[0]-1][pawn[1]-1] == 2 and board[pawn[0]-2][pawn[1]-2] == 0:
-                capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]),str(chr(pawn[1]-2+97))+ str(8-pawn[0]+2))
-                possibleCaptures.add(capture)
-        if pawn[1]<6:
-            if board[pawn[0]-1][pawn[1]+1] == 2 and board[pawn[0]-2][pawn[1]+2] == 0:
-                capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]), str(chr(pawn[1]+2+97))+ str(8-pawn[0]+2))
-                possibleCaptures.add(capture)
+        if pawn[0]>1:
+            if pawn[1]>1:
+                if board[pawn[0]-1][pawn[1]-1] == 2 and board[pawn[0]-2][pawn[1]-2] == 0:
+                    capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]),str(chr(pawn[1]-2+97))+ str(8-pawn[0]+2))
+                    possibleCaptures.add(capture)
+            if pawn[1]<6:
+                if board[pawn[0]-1][pawn[1]+1] == 2 and board[pawn[0]-2][pawn[1]+2] == 0:
+                    capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]), str(chr(pawn[1]+2+97))+ str(8-pawn[0]+2))
+                    possibleCaptures.add(capture)
     
-    #print(possibleCaptures)
     return possibleCaptures
 
 def capture(board,pos,target):

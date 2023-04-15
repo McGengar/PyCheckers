@@ -1,6 +1,6 @@
 from mapGen import *
 from pawnMove import *
-from ai import aiMove
+from ai import Ai
 import os
 
 
@@ -14,14 +14,14 @@ if __name__ == "__main__":
              [0,0,0,0,0,0,0,0],
              [0,1,0,1,0,1,0,1],
              [1,0,1,0,1,0,1,0]]
-    # board = [[0,0,0,2,0,2,0,2],
-            #  [0,0,0,0,2,0,2,0],
+    # board = [[0,2,0,0,0,2,0,2],
+            #  [2,0,0,0,2,0,0,0],
             #  [0,0,0,0,0,0,0,0],
-            #  [0,0,0,0,2,0,0,0],
+            #  [0,0,1,0,0,0,0,0],
+            #  [0,1,0,0,0,0,0,0],
             #  [0,0,0,0,0,0,0,0],
-            #  [0,0,2,0,0,0,2,0],
-            #  [0,1,0,1,0,1,0,1],
-            #  [1,0,1,0,1,0,1,0]]
+            #  [0,1,0,0,0,1,0,1],
+            #  [1,0,0,0,1,0,1,0]]
 
 
     while True:
@@ -93,7 +93,7 @@ if __name__ == "__main__":
                     print("Podano nieprawidlowe pole!")
                     target=input("Podaj gdzie go chcesz ruszyc pionka: ")
                 board = move(board,pos,target)
-        board = aiMove(board)
+        board = Ai(board)
         #input("confirm end of turn")
         
             
