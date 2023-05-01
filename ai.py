@@ -97,6 +97,7 @@ def Ai(board):
     else:
         print(checkMovesAi(pawnPositions, board))
         possibleMoves = checkMovesAi(pawnPositions, board)
-        board = moveAi(board, random.choice(possibleMoves))
-        board = checkPromotionsAi(board)
+        if len(possibleMoves) >0:
+            board = moveAi(board, random.choice(possibleMoves))
+            board = checkPromotionsAi(board)
     return board
