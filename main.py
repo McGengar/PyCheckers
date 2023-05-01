@@ -2,6 +2,7 @@ from mapGen import *
 from pawnMove import *
 from ai import Ai
 import os
+from end import checkWin
 
 
 if __name__ == "__main__":
@@ -14,14 +15,14 @@ if __name__ == "__main__":
              [0,0,0,0,0,0,0,0],
              [0,1,0,1,0,1,0,1],
              [1,0,1,0,1,0,1,0]]
-    # board = [[0,2,0,0,0,2,0,2],
-            #  [2,0,0,0,2,0,0,0],
+    # board = [[0,0,0,0,0,0,0,0],
+            #  [1,0,0,0,0,1,0,0],
+            #  [0,0,0,2,0,0,0,0],
             #  [0,0,0,0,0,0,0,0],
-            #  [0,0,1,0,0,0,0,0],
-            #  [0,1,0,0,0,0,0,0],
             #  [0,0,0,0,0,0,0,0],
-            #  [0,1,0,0,0,1,0,1],
-            #  [1,0,0,0,1,0,1,0]]
+            #  [0,0,0,0,1,0,0,0],
+            #  [0,0,0,0,0,0,0,0],
+            #  [0,0,0,0,0,0,0,0]]
 
 
     while True:
@@ -51,6 +52,7 @@ if __name__ == "__main__":
                 target=input("Podaj gdzie go chcesz ruszyc pionka: ")
             board = capture(board,pos,target)
             board = move(board,pos,target)
+            board = checkPromotions(board)
             caputuredThisTurn=True
             pos=target
             while len(checkCaptures(board))>0 and moreCaptures==True:
@@ -74,6 +76,7 @@ if __name__ == "__main__":
                         target=input("Podaj gdzie go chcesz ruszyc pionka: ")
                     board = capture(board,pos,target)
                     board = move(board,pos,target)
+                    board = checkPromotions(board)
                     pos=target
                 else:
                     moreCaptures=False
@@ -93,7 +96,19 @@ if __name__ == "__main__":
                     print("Podano nieprawidlowe pole!")
                     target=input("Podaj gdzie go chcesz ruszyc pionka: ")
                 board = move(board,pos,target)
+                board = checkPromotions(board)
+        if checkWin(board)!=False:
+                os.system('cls')
+                draw(board)
+                print(checkWin(board))
+                break
         board = Ai(board)
+        if checkWin(board)!=False:
+                os.system('cls')
+                draw(board)
+                print(checkWin(board))
+                break
+        
         #input("confirm end of turn")
         
             

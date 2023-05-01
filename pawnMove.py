@@ -17,6 +17,13 @@ def getPawnPositions(board):
                 pawnPositions.append([i,index])
     return pawnPositions
 
+def checkPromotions(board):
+    pawnPositions = getPawnPositions(board)
+    for pawn in pawnPositions:
+        if pawn[0]==0:
+            board[pawn[0]][pawn[1]]=3
+    return board
+
 def checkCaptures(board):
     pawnPositions = getPawnPositions(board)
     possibleCaptures = set()

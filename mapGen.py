@@ -17,7 +17,11 @@ def draw(map):
         print(8-i,end="")
         for column in row:
             cell = " "
-            if column == 2:
+            if column == 4:
+                cell=black_promoted
+            elif column == 3:
+                cell=white_promoted
+            elif column == 2:
                 cell=black
             elif column == 1:
                 cell=white

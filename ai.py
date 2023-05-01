@@ -14,6 +14,13 @@ def checkCapturesAi(pawnPositions,board):
                     possibleCaptures.append(capture)
     return possibleCaptures
 
+def checkPromotionsAi(board):
+    pawnPositions = getPawnPositionsAi(board)
+    for pawn in pawnPositions:
+        if pawn[0]==7:
+            board[pawn[0]][pawn[1]]=4
+    return board
+
 def captureAi(board,move):
     posx=int(move[1])
     posy=int(move[0])
@@ -68,6 +75,7 @@ def Ai(board):
         move= random.choice(possibleCaputres)
         board = captureAi(board, move)
         board = moveAi(board, move)
+        board = checkPromotionsAi(board)
         pawnPositions = getPawnPositionsAi(board)
         possibleCaputres = checkCapturesAi(pawnPositions,board)
         while len(possibleCaputres)>0 and moreCaptures ==True:
@@ -82,6 +90,7 @@ def Ai(board):
                 move= random.choice(newCaptures)
                 board = captureAi(board, move)
                 board = moveAi(board, move)
+                board = checkPromotionsAi(board)
             else:
                 moreCaptures = False    
 
@@ -89,4 +98,5 @@ def Ai(board):
         print(checkMovesAi(pawnPositions, board))
         possibleMoves = checkMovesAi(pawnPositions, board)
         board = moveAi(board, random.choice(possibleMoves))
+        board = checkPromotionsAi(board)
     return board
