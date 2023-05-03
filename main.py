@@ -15,14 +15,14 @@ if __name__ == "__main__":
              [0,0,0,0,0,0,0,0],
              [0,1,0,1,0,1,0,1],
              [1,0,1,0,1,0,1,0]]
-    # board = [[0,0,0,0,0,0,0,0],
+    # board = [[0,0,0,2,0,0,0,0],
+            #  [0,0,0,0,0,0,2,0],
+            #  [0,0,0,0,0,1,0,0],
+            #  [2,0,0,0,1,0,2,0],
+            #  [0,0,0,0,0,0,0,1],
+            #  [1,0,0,0,0,0,0,0],
             #  [0,0,0,0,0,0,0,0],
-            #  [0,0,0,0,0,0,0,0],
-            #  [0,0,3,0,1,0,1,0],
-            #  [0,0,0,2,0,0,0,0],
-            #  [0,0,0,0,0,0,0,0],
-            #  [0,0,0,0,0,4,0,0],
-            #  [0,0,0,0,0,0,2,0]]
+            #  [0,0,1,0,0,0,4,0]]
 
 
     while True:
@@ -53,9 +53,10 @@ if __name__ == "__main__":
             board = capture(board,pos,target)
             board = move(board,pos,target)
             board = checkPromotions(board)
+            
             caputuredThisTurn=True
             pos=target
-            while len(checkCaptures(board))>0 and moreCaptures==True:
+            while len(checkCaptures(board))>0 and moreCaptures==True:   
                 os.system('cls')
                 draw(board)
                 print()
@@ -63,6 +64,7 @@ if __name__ == "__main__":
                 capturePos=[]
                 capturesForPawn=[]
                 newCaptures = list(checkCaptures(board))
+
                 for i in range(len(newCaptures)):
                     capturingPawns.append(newCaptures[i][0])
                     capturePos.append(newCaptures[i][1])

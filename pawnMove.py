@@ -17,6 +17,7 @@ def getPawnPositions(board):
                 pawnPositions.append([i,index])
     return pawnPositions
 
+
 def checkPromotions(board):
     pawnPositions = getPawnPositions(board)
     for pawn in pawnPositions:
@@ -42,11 +43,11 @@ def checkCaptures(board):
         if p == 3:
             if pawn[0]<6:
                 if pawn[1]>1:
-                    if (board[pawn[0]+1][pawn[1]-1] == 2 or board[pawn[0]-1][pawn[1]-1] == 4) and board[pawn[0]+2][pawn[1]-2] == 0:
+                    if (board[pawn[0]+1][pawn[1]-1] == 2 or board[pawn[0]+1][pawn[1]-1] == 4) and board[pawn[0]+2][pawn[1]-2] == 0:
                         capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]),str(chr(pawn[1]-2+97))+ str(8-pawn[0]-2))
                         possibleCaptures.add(capture)
                 if pawn[1]<6:
-                    if (board[pawn[0]+1][pawn[1]+1] == 2 or board[pawn[0]-1][pawn[1]+1] == 4) and board[pawn[0]+2][pawn[1]+2] == 0:
+                    if (board[pawn[0]+1][pawn[1]+1] == 2 or board[pawn[0]+1][pawn[1]+1] == 4) and board[pawn[0]+2][pawn[1]+2] == 0:
                         capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]), str(chr(pawn[1]+2+97))+ str(8-pawn[0]-2))
                         possibleCaptures.add(capture)
     return possibleCaptures

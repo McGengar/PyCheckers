@@ -92,8 +92,6 @@ def getPawnPositionsAi(board):
 def Ai(board):
     pawnPositions = getPawnPositionsAi(board)
     possibleCaputres = checkCapturesAi(pawnPositions,board)
-    print(possibleCaputres)
-    input()
     if len(possibleCaputres)>0:
         moreCaptures =True
         move= random.choice(possibleCaputres)
