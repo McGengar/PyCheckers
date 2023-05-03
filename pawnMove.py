@@ -47,8 +47,8 @@ def capture(board,pos,target):
     targetx=int(ord(target[0].lower())-97)
     targety=8-int(target[1])
     capturex=int((posx+targetx)/2)
-    caputrey=int((posy+targety)/2)
-    board[caputrey][capturex]=0
+    capturey=int((posy+targety)/2)
+    board[capturey][capturex]=0
     return board
 
 def checkPos(board,pos):

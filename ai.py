@@ -27,8 +27,8 @@ def captureAi(board,move):
     targetx=int(move[3])
     targety=int(move[2])
     capturex=int((posx+targetx)/2)
-    caputrey=int((posy+targety)/2)
-    board[caputrey][capturex]=0
+    capturey=int((posy+targety)/2)
+    board[capturey][capturex]=0
     return board
 
 def checkMovesAi(pawnPositions,board):
