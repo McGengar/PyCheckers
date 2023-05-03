@@ -13,7 +13,7 @@ def getPawnPositions(board):
     pawnPositions = []
     for i,row in enumerate(board):
         for index,column in enumerate(row):
-            if column==1:
+            if column==1 or column==3:
                 pawnPositions.append([i,index])
     return pawnPositions
 
@@ -29,16 +29,26 @@ def checkCaptures(board):
     possibleCaptures = set()
 
     for pawn in pawnPositions:
+        p = board[pawn[0]][pawn[1]]
         if pawn[0]>1:
             if pawn[1]>1:
-                if board[pawn[0]-1][pawn[1]-1] == 2 and board[pawn[0]-2][pawn[1]-2] == 0:
+                if (board[pawn[0]-1][pawn[1]-1] == 2 or board[pawn[0]-1][pawn[1]-1] == 4) and board[pawn[0]-2][pawn[1]-2] == 0:
                     capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]),str(chr(pawn[1]-2+97))+ str(8-pawn[0]+2))
                     possibleCaptures.add(capture)
             if pawn[1]<6:
-                if board[pawn[0]-1][pawn[1]+1] == 2 and board[pawn[0]-2][pawn[1]+2] == 0:
+                if (board[pawn[0]-1][pawn[1]+1] == 2 or board[pawn[0]-1][pawn[1]+1] == 4) and board[pawn[0]-2][pawn[1]+2] == 0:
                     capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]), str(chr(pawn[1]+2+97))+ str(8-pawn[0]+2))
                     possibleCaptures.add(capture)
-    
+        if p == 3:
+            if pawn[0]<6:
+                if pawn[1]>1:
+                    if (board[pawn[0]+1][pawn[1]-1] == 2 or board[pawn[0]-1][pawn[1]-1] == 4) and board[pawn[0]+2][pawn[1]-2] == 0:
+                        capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]),str(chr(pawn[1]-2+97))+ str(8-pawn[0]-2))
+                        possibleCaptures.add(capture)
+                if pawn[1]<6:
+                    if (board[pawn[0]+1][pawn[1]+1] == 2 or board[pawn[0]-1][pawn[1]+1] == 4) and board[pawn[0]+2][pawn[1]+2] == 0:
+                        capture =(str(chr(pawn[1]+97))+ str(8-pawn[0]), str(chr(pawn[1]+2+97))+ str(8-pawn[0]-2))
+                        possibleCaptures.add(capture)
     return possibleCaptures
 
 def capture(board,pos,target):
@@ -54,7 +64,7 @@ def capture(board,pos,target):
 def checkPos(board,pos):
     posx=int(ord(pos[0].lower())-97)
     posy=8-int(pos[1])
-    if board[posy][posx]==1:
+    if board[posy][posx]==1 or board[posy][posx]==3:
         return True
     else:
         return False
@@ -63,6 +73,7 @@ def checkMovesWhitePawn(board,pos):
     possibleMoves = set()
     posx=int(ord(pos[0].lower())-97)
     posy=8-int(pos[1])
+    pawn = board[posy][posx]
     if posy>0:
         if posx>0 and board[posy-1][posx-1]==0:
             targetx=chr(posx-1+97)
@@ -72,6 +83,16 @@ def checkMovesWhitePawn(board,pos):
             targetx=chr(posx+1+97)
             targety=8-posy+1
             possibleMoves.add(targetx+str(targety))
+    if pawn == 3:
+        if posy<7:
+            if posx>0 and board[posy+1][posx-1]==0:
+                targetx=chr(posx-1+97)
+                targety=8-posy-1
+                possibleMoves.add(targetx+str(targety))
+            if posx<7 and board[posy+1][posx+1]==0:
+                targetx=chr(posx+1+97)
+                targety=8-posy-1
+                possibleMoves.add(targetx+str(targety))
     return possibleMoves
 
 

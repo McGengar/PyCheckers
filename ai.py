@@ -3,15 +3,26 @@ import random
 def checkCapturesAi(pawnPositions,board):
     possibleCaptures=  []
     for pawn in pawnPositions:
+        p = board[pawn[0]][pawn[1]]
         if pawn[0]<6:
             if pawn[1]>1:
-                if board[pawn[0]+1][pawn[1]-1] == 1 and board[pawn[0]+2][pawn[1]-2] == 0:
+                if (board[pawn[0]+1][pawn[1]-1] == 1 or board[pawn[0]+1][pawn[1]-1] == 3) and board[pawn[0]+2][pawn[1]-2] == 0:
                     capture =str(pawn[0])+ str(pawn[1])+str(pawn[0]+2)+ str(pawn[1]-2)
                     possibleCaptures.append(capture)
             if pawn[1]<6:
-                if board[pawn[0]+1][pawn[1]+1] == 1 and board[pawn[0]+2][pawn[1]+2] == 0:
+                if (board[pawn[0]+1][pawn[1]+1] == 1 or board[pawn[0]+1][pawn[1]+1] == 3) and board[pawn[0]+2][pawn[1]+2] == 0:
                     capture =str(pawn[0])+ str(pawn[1])+str(pawn[0]+2)+ str(pawn[1]+2)
                     possibleCaptures.append(capture)
+        if p==4:
+            if pawn[0]>1:
+                if pawn[1]>1:
+                    if (board[pawn[0]-1][pawn[1]-1] == 1 or board[pawn[0]-1][pawn[1]-1] == 3) and board[pawn[0]-2][pawn[1]-2] == 0:
+                        capture =str(pawn[0])+ str(pawn[1])+str(pawn[0]-2)+ str(pawn[1]-2)
+                        possibleCaptures.append(capture)
+                if pawn[1]<6:
+                    if (board[pawn[0]-1][pawn[1]+1] == 1 or board[pawn[0]-1][pawn[1]+1] == 3) and board[pawn[0]-2][pawn[1]+2] == 0:
+                        capture =str(pawn[0])+ str(pawn[1])+str(pawn[0]-2)+ str(pawn[1]+2)
+                        possibleCaptures.append(capture)
     return possibleCaptures
 
 def checkPromotionsAi(board):
@@ -36,6 +47,7 @@ def checkMovesAi(pawnPositions,board):
     for pawn in pawnPositions:
         posx=pawn[1]
         posy=pawn[0]
+        pawn=board[posy][posx]
         if posy<7:
             if posx>0 and board[posy+1][posx-1]==0:
                 targetx=posx-1
@@ -45,6 +57,16 @@ def checkMovesAi(pawnPositions,board):
                 targetx=posx+1
                 targety=posy+1
                 possibleMoves.append(str(posy)+str(posx)+str(targety)+str(targetx))
+        if pawn==4:
+            if posy>0:
+                if posx>0 and board[posy-1][posx-1]==0:
+                    targetx=posx-1
+                    targety=posy-1
+                    possibleMoves.append(str(posy)+str(posx)+str(targety)+str(targetx))
+                if posx<7 and board[posy-1][posx+1]==0:
+                    targetx=posx+1
+                    targety=posy-1
+                    possibleMoves.append(str(posy)+str(posx)+str(targety)+str(targetx))
     return possibleMoves
 
 def moveAi(board, move):
@@ -61,7 +83,7 @@ def getPawnPositionsAi(board):
     pawnPositions = []
     for i,row in enumerate(board):
         for index,column in enumerate(row):
-            if column==2:
+            if column==2 or column==4:
                 pawnPositions.append([i,index])
     return pawnPositions
 
@@ -70,6 +92,8 @@ def getPawnPositionsAi(board):
 def Ai(board):
     pawnPositions = getPawnPositionsAi(board)
     possibleCaputres = checkCapturesAi(pawnPositions,board)
+    print(possibleCaputres)
+    input()
     if len(possibleCaputres)>0:
         moreCaptures =True
         move= random.choice(possibleCaputres)
