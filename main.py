@@ -95,7 +95,15 @@ if __name__ == "__main__":
                     possibleMoves = checkMovesWhitePawn(board,pos)
                 target=input("Enter where do you want pawn to move: ")
                 while target.lower()not in(possibleMoves):
-                    print("Incorrect field!")
+                    if target.lower() == "back":
+                        pos=input("Enter pawn field: ")
+                        possibleMoves = checkMovesWhitePawn(board,pos)
+                        while checkPos(board,pos)==False or len(possibleMoves)==0:
+                            print("There is no pawn on chosen field that you could move!")
+                            pos=input("Enter pawn field: ")
+                            possibleMoves = checkMovesWhitePawn(board,pos)
+                    else:
+                        print("Incorrect field! (type 'back' to choose other pawn)")
                     target=input("Enter where do you want pawn to move: ")
                 board = move(board,pos,target)
                 board = checkPromotions(board)
