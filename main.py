@@ -31,7 +31,7 @@ if __name__ == "__main__":
             os.system('cls')
             draw(board)
             print()
-            pos=input("Podaj pole pionkaX: ")
+            pos=input("Enter pawn fieldX: ")
             capturingPawns = []
             capturePos = []
             moreCaptures=True
@@ -39,17 +39,17 @@ if __name__ == "__main__":
                 capturingPawns.append(i[0])
                 capturePos.append(i[1])
             while checkPos(board,pos)==False or pos.lower() not in capturingPawns:
-                print("Aktualnie mozlwie jest bicie przy pomocy pionka na innym polu!")
-                pos=input("Podaj pole pionka: ")
+                print("There is possible capture with pawn on another field!")
+                pos=input("Enter pawn field: ")
                 possibleMoves = checkMovesWhitePawn(board,pos)
             capturesForPawn = []
             for i in range(len(capturePos)):
                 if capturingPawns[i]==pos:
                     capturesForPawn.append(capturePos[i])
-            target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+            target=input("Enter where do you want pawn to move: ")
             while target.lower()not in capturesForPawn:
-                print("Podano nieprawidlowe pole!")
-                target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                print("Incorrect field!")
+                target=input("Enter where do you want pawn to move: ")
             board = capture(board,pos,target)
             board = move(board,pos,target)
             board = checkPromotions(board)
@@ -72,10 +72,10 @@ if __name__ == "__main__":
                     if capturingPawns[i]==pos:
                         capturesForPawn.append(capturePos[i])
                 if len(capturesForPawn)>0:
-                    target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                    target=input("Enter where do you want pawn to move: ")
                     while target.lower() not in capturesForPawn:
-                        print("Podano nieprawidlowe pole!")
-                        target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                        print("Incorrect field!")
+                        target=input("Enter where do you want pawn to move: ")
                     board = capture(board,pos,target)
                     board = move(board,pos,target)
                     board = checkPromotions(board)
@@ -87,16 +87,16 @@ if __name__ == "__main__":
                 os.system('cls')
                 draw(board)
                 print()
-                pos=input("Podaj pole pionka: ")
+                pos=input("Enter pawn field: ")
                 possibleMoves = checkMovesWhitePawn(board,pos)
                 while checkPos(board,pos)==False or len(possibleMoves)==0:
-                    print("Na podanym polu nie znajduje sie pionek ktorym mozes sie ruszyc!")
-                    pos=input("Podaj pole pionka: ")
+                    print("There is no pawn on chosen field that you could move!")
+                    pos=input("Enter pawn field: ")
                     possibleMoves = checkMovesWhitePawn(board,pos)
-                target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                target=input("Enter where do you want pawn to move: ")
                 while target.lower()not in(possibleMoves):
-                    print("Podano nieprawidlowe pole!")
-                    target=input("Podaj gdzie go chcesz ruszyc pionka: ")
+                    print("Incorrect field!")
+                    target=input("Enter where do you want pawn to move: ")
                 board = move(board,pos,target)
                 board = checkPromotions(board)
         os.system('cls')
@@ -104,13 +104,19 @@ if __name__ == "__main__":
         if checkWin(board)!=False:
                 os.system('cls')
                 draw(board)
-                print(checkWin(board))
+                if checkWin(board)==1:
+                    print("Congratulations, you won!")
+                else:
+                    print("Shame on you, you lost!")
                 break
         board = Ai(board)
         if checkWin(board)!=False:
                 os.system('cls')
                 draw(board)
-                print(checkWin(board))
+                if checkWin(board)==1:
+                    print("Congratulations, you won!")
+                else:
+                    print("Shame on you, you lost!")
                 break
         
         #input("confirm end of turn")
