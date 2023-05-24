@@ -91,21 +91,21 @@ def getPawnPositionsAi(board):
 
 def Ai(board):
     pawnPositions = getPawnPositionsAi(board)
-    possibleCaputres = checkCapturesAi(pawnPositions,board)
-    if len(possibleCaputres)>0:
+    possibleCaptures = checkCapturesAi(pawnPositions,board)
+    if len(possibleCaptures)>0:
         moreCaptures =True
-        move= random.choice(possibleCaputres)
+        move= random.choice(possibleCaptures)
         board = captureAi(board, move)
         board = moveAi(board, move)
         board = checkPromotionsAi(board)
         pawnPositions = getPawnPositionsAi(board)
-        possibleCaputres = checkCapturesAi(pawnPositions,board)
-        while len(possibleCaputres)>0 and moreCaptures ==True:
+        possibleCaptures = checkCapturesAi(pawnPositions,board)
+        while len(possibleCaptures)>0 and moreCaptures ==True:
             pawnPositions = getPawnPositionsAi(board)
-            possibleCaputres = checkCapturesAi(pawnPositions,board)
+            possibleCaptures = checkCapturesAi(pawnPositions,board)
             newCaptures = []
             newPos = move[2:]
-            for capture in possibleCaputres:
+            for capture in possibleCaptures:
                 if capture[:2]==newPos:
                     newCaptures.append(capture)
             if len(newCaptures)>0:

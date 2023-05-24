@@ -1,9 +1,8 @@
 def checkWin(board):
     black = 0
     white = 0
-    count = []
-    for i,row in enumerate(board):
-        for index,column in enumerate(row):
+    for row in enumerate(board):
+        for column in enumerate(row):
             if column==1 or column==3:
                 white+=1
             if column==2 or column==4:

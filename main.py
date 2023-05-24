@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
 
     while True:
-        caputuredThisTurn=False
+        capturedThisTurn=False
         if len(checkCaptures(board))>0:
             os.system('cls')
             draw(board)
@@ -54,7 +54,7 @@ if __name__ == "__main__":
             board = move(board,pos,target)
             board = checkPromotions(board)
             
-            caputuredThisTurn=True
+            capturedThisTurn=True
             pos=target
             while len(checkCaptures(board))>0 and moreCaptures==True:   
                 os.system('cls')
@@ -83,7 +83,7 @@ if __name__ == "__main__":
                 else:
                     moreCaptures=False
         else: 
-            if caputuredThisTurn==False:
+            if capturedThisTurn==False:
                 os.system('cls')
                 draw(board)
                 print()
